@@ -82,6 +82,7 @@ Create table Game (
     HomeTeamId INT NOT NULL,
     AwayTeamId INT NOT NULL,
     WinnerTeamId INT NULL,
+
     constraint PK_Game PRIMARY KEY (GameId),
     constraint UQ_Game UNIQUE (HomeTeamId, GameDate, GameTime),
     constraint FK_Game_HomeScore FOREIGN KEY (HomeScore) REFERENCES Team(TeamId),
@@ -114,11 +115,11 @@ go
 
 create table WeeklyPredictionResults
 (
-    WeeklyPredictionResultsId INT NOT NULL IDENTITY(1,1),
-    StartDate DATE NOT NULL,
-    NumberofCorrectPredictions INT NOT NULL,
+    WPRId INT NOT NULL IDENTITY(1,1),
+    StartDate DATE NOT NULL default GETDATE(),
+    NumberofCorrectPredictions INT NOT NULL default 0,
     AppUserId INT NOT NULL,
-    constraint PK_WeeklyPredictionResults PRIMARY KEY (WeeklyPredictionResultsId),
+    constraint PK_WeeklyPredictionResults PRIMARY KEY (WPRId),
     constraint FK_WeeklyPredictionResults_AppUser FOREIGN KEY (AppUserId) REFERENCES AppUser(AppUserId)
 );
 

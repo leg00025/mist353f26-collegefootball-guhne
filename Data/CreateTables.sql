@@ -17,6 +17,8 @@ if object_id('PlayerRoster') is not null
     drop table PlayerRoster;
 if object_id('CoachRoster') is not null
     drop table CoachRoster;
+if object_id('PlayerStats') is not null
+    drop table PlayerStats;
 if object_id('Roster') is not null
     drop table Roster;
 if object_id('Coach') is not null
@@ -129,7 +131,7 @@ Create table Player (
     PlayerId INT NOT NULL IDENTITY(1,1),
     PlayerName VARCHAR(50) NOT NULL,
     PlayerDateofBirth DATE NOT NULL,
-    PositionId INT NOT NULL,
+    constraint UQ_Player UNIQUE (PlayerName, PlayerDateofBirth),
     constraint PK_Player PRIMARY KEY (PlayerId),
 );
 
@@ -181,6 +183,17 @@ create table Roster (
     constraint FK_Roster_Team FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
 );
 
+go 
+
+Create table PlayerStats(
+    PlayerStatsId INT NOT NULL IDENTITY(1,1),
+    PlayerId INT NOT NULL,
+    RosterId INT NOT NULL,
+    constraint PK_PlayerStats PRIMARY KEY (PlayerStatsId),
+    constraint UQ_PlayerStats UNIQUE (PlayerId, RosterId),
+    constraint FK_PlayerStats_Player FOREIGN KEY (PlayerId) REFERENCES Player(PlayerId),
+    constraint FK_PlayerStats_Roster FOREIGN KEY (RosterId) REFERENCES Roster(RosterId)
+);
 go
 
 create table CoachRoster (

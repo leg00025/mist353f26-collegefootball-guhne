@@ -60,7 +60,6 @@ create table Stadium
 (
     StadiumId INT NOT NULL IDENTITY(1,1),
     StadiumName VARCHAR(50) NOT NULL,
-    StadiumStreetAddress VARCHAR(50) NOT NULL,
     StadiumCity VARCHAR(50) NOT NULL,
     StadiumState CHAR(2) NOT NULL,
     StadiumCapacity INT NOT NULL,

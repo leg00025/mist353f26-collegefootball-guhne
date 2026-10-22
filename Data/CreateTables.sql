@@ -10,6 +10,8 @@ ALTER ROLE db_owner ADD MEMBER NandaSurendra; */
 
 
 
+if object_id('WideReceiverStats') is not null
+    drop table WideReceiverStats;
 if object_id('ReturnerStats') is not null
     drop table ReturnerStats;
 if object_id('DefenderStats') is not null
@@ -319,6 +321,20 @@ create table ReturnerStats (
     constraint PK_ReturnerStats PRIMARY KEY (ReturnerStatsId),
     constraint FK_ReturnerStats_PlayerStats FOREIGN KEY (ReturnerStatsId) REFERENCES PlayerStats(PlayerStatsId)
 );
+
+GO
+ 
+create table WideReceiverStats (
+    WideReceiverStatsId INT NOT NULL,
+    WRReceptions INT NOT NULL,
+    WRYards INT NOT NULL,
+    WRTouchdowns INT NOT NULL,
+    WRLongestReception INT NOT NULL,
+    WRFumbles INT NOT NULL,
+    constraint PK_WideReceiverStats PRIMARY KEY (WideReceiverStatsId),
+    constraint FK_WideReceiverStats_PlayerStats FOREIGN KEY (WideReceiverStatsId) REFERENCES PlayerStats(PlayerStatsId)
+);
+
 
 
 
